@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blogger</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="/css/base.css">
+
+        <script async defer src="https://apis.google.com/js/api.js"></script>
+        <script async defer src="https://accounts.google.com/gsi/client"></script>
+        <script async defer src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+        <script type="module" src="./js/view.js"></script> 
+        <script type="module" src="./js/login.js"></script>
+        <script type="module" src="./js/model.js"></script>
+        <script type="module" src="./js/presenter.js"></script>
+        <script type="module" src="./js/router.js"></script>
+        
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="top-row">
+                <div class="header-left">
+                    <h1><img src="/img/logo.png" alt="BLOGGER" id="logo"></h1>
+                </div>
+                
+                <div class="header-right">
+                    <div class="dropdown">
+                        <button class="dropbtn">My Blogs</button>
+                        <div class="dropdown-content" id="nav_slot"></div>
+                    </div>
+                    <button id="sign-in-or-out-button">Anmelden</button>
+                    <p id="login_info"></p>
+                </div>
+            </div>
+            <div class="bottom-row" id="blog_info_slot"></div> 
+        </header>
+        
+        
+        
+        <main id="main-content_slot"></main>
+        <hr>
+        <div id="templates" hidden>
+            <ul class="nav" id="nav"> 
+                <li data-path = "/blogOverview/%id%"> %name% (<span>%postsTotalItems%</span> posts)</li>
+            </ul>
+            
+            <div id="blog_info">
+                <div>
+                    <h3>%name%</h3>
+                    <p>Anzahl Posts: %postsTotalItems%</p>
+                    <p>Erscheinungsdatum: %formatPublishedDate%</p>
+                    <p>Letzte Änderung: %formatUpdatedDate%</p>
+                </div>
+                <img src="/img/info.png">
+            </div>
+            
+            <div class="blog_overview-container" id="blog_overview">
+                <div class="newpost-container">
+                    <h2 id="post-ubersicht">Blog Übersicht</h2> 
+                    <button type="button" value="add" data-path="/add/%blogId%"> New Post
+                        <img src="/img/newpost.png" onclick="this.parentElement.click();">
+                    </button>
+                </div>
+                
+                <article class="post">
+                    
+                    <header> 
+                        <h3><a href="/detail/%blogId%/%id%"> %title%</a>  </h3> 
+                        <p>Erscheinungsdatum: %formatPublishedDate%</p>
+                        <p>Letzte Änderung: %formatUpdatedDate%</p>
+                        <p>Anzahl von Kommentar : %commentsTotalItems%</p>
+                    </header>
+                    <footer id="buttons_overview">
+                        <nav></nav>  <!-- Can I put only part of the buttons? -->
+                    </footer>
+                </article>
+            
+            </div>
+            <div id="detail">
+                <h2>Detailansicht</h2>
+                <article>
+                    <header>
+                        <h3>%title%</h3>
+                        <p>Erscheinungsdatum: %formatPublishedDate%</p>
+                        <p>Letzte Änderung: %formatUpdatedDate%</p>
+                        <p>Anzahl von Kommentaren: %commentsTotalItems%</p>
+                    </header>
+                    <p>Content of Post : %content%</p>
+                    <footer>
+                        <nav></nav>
+                    </footer>
+                </article>
+                <hr>
+                <a href="/blogOverview/%blogId%">Overview</a>
+               
+            </div> <!-- detail -->
+            
+            <div id="comments">
+                <h4>Kommentare</h4>
+                <article class="comment-article">
+                    <header>
+                        <h5>%author%</h5>
+                        <div>
+                            <p>published: %formatPublishedDate%</p>
+                            <p>updated: %formatUpdatedDate%</p>
+                        </div>
+                       
+                    </header>
+                    <p>%content%</p>
+                    <footer>
+                        <button class="comment-delete" data-id = "%id%" data-action="deleteComment">Delete</button>
+                    </footer>
+                </article>
+            </div>  
+            <ul class="buttons-edit-delete" id="buttons_edit_delete">
+                <li data-path="/edit/%blogId%/%id%"><img class="icon" src="/img/edit.png" alt="Edit">
+                </li>
+                <li data-id = "%id%" data-action = "deletePost"> <img class="icon"  src="/img/delete.png" alt="Delete">
+                </li>
+            </ul>  
+            
+            <!-- Edit -->
+            <div id = "edit">
+                <h3>Post of Blog Editor</h3>
+                <form class="form">
+                    <ul>
+                        
+                        <li>
+                            <label for="titel">Titel of Post :</label>
+                            <input id="titel" type="text" name="titel" value="%title%">
+                        </li>
+                        <li>
+                            <label for="content">Content :</label>
+                            <div contentEditable id="content">%content%</div>
+                        
+                        </li>
+                        <li>
+                            <nav>
+                            <button type="button" value="cancel" data-action = "cancel"> Abbrechen </button>
+                            <button type="button" value="save"  data-action = "save"> Speichern </button>
+                            </nav>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            
+            <!-- Add New Post -->
+            <div id = "add">
+                <h3>Post Insert</h3>
+                <form class="form">
+                    <ul>
+                        
+                        <li>
+                            <label for="titel">Titel of Post:</label>
+                            <input id="titel" type="text" name="titel">
+                        </li>
+                        <li>
+                            <label for="content">Content:</label>
+                            <textarea id= "content" name ="content" row="4" cols="50"></textarea>
+                        </li>                      
+                        <li>
+                            <nav>
+                            <button type="button" value="cancel"  data-action = "cancel"> Abbrechen </button>
+                            <button type="button" value="save"  data-action = "save"> Speichern </button>
+                            </nav>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div> <!-- templates -->
+    </body>
+</html>

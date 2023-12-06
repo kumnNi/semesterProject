@@ -1,0 +1,294 @@
+li {
+    list-style-type: none;
+}
+.main-header button{
+    filter: brightness(75%)
+}
+
+* {
+    box-sizing: border-box;
+}
+#login_info {
+    color: #f1f1f1;
+}
+
+
+
+
+/* Header */
+.main-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    background-color: #f1f1f1;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.bottom-row{
+    background-color: teal;
+    padding: 20px;
+}
+
+.header-left h1 {
+    margin: 0;
+}
+
+#logo {
+    max-height: 50px; 
+    max-width: 100%; 
+}
+
+.header-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.dropbtn {
+    border-radius: 10%;
+    background-color: teal;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    filter: brightness(90%);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#nav_slot ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#nav_slot li {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+#nav_slot li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+#nav_slot li a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    filter: brightness(90%);
+}
+
+#sign-in-or-out-button {
+    background-color: teal;
+    color: white;
+    border-radius: 10%;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.logged-in {
+    background-color: teal;
+    position: relative; 
+    width: 40px;  
+    height: 40px;  
+    line-height: 40px; 
+    border-radius: 50%; 
+    text-align: center;
+    vertical-align: middle; 
+    font-size: 12px; 
+    color:white; 
+    margin-right: 20px;
+}
+
+
+
+/* Blog Info-slot */
+
+#blog_info_slot{
+    padding: 2% 20%;
+    background-color: teal;
+    color: white;
+    font-size: 2.5 rem;
+}
+#blog_info_slot div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#blog_info_slot div div{
+    display: inline-block;
+}
+
+#blog_info_slot div img {
+    border-radius: 50%;
+    max-width: 200px;
+    height: auto;
+    display: inline-block; 
+    background-color: white;
+
+}
+/* New post */
+
+.blog_overview-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.newpost-container {
+    width: 100%;
+    padding-right: 2%;
+    margin: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* New post button */
+.newpost-container button {
+    display: flex;
+    align-items: center;
+ 
+    padding: 5px;  
+    height: 50px;  
+    border: none;
+    border-radius: 10%;
+}
+
+
+.newpost-container button img {
+    margin-left: 1%;
+    width: 30px;
+}
+
+/* Post Styles */
+.post {
+    width: 100%; 
+    box-sizing: border-box; 
+    margin: 10px;
+    border-radius: 15px; 
+    border: none;
+    background-color: #f0f0f0; 
+}
+
+.post header{
+    margin-left: 2%;
+}
+
+/* Responsive mit unterschidliche Layout */
+@media(min-width: 576px) {
+    .post {
+        width: 50%; 
+    }
+}
+
+@media(min-width: 768px) {
+    .post {
+        width: 33%; 
+    }}
+
+@media(min-width: 992px) {
+    .post {
+        width: 25%; 
+    }
+}
+
+@media(min-width: 1200px) {
+    .post {
+        width: 23%; 
+    }
+}
+
+
+
+/* Buttons edit and delete */
+
+.buttons-edit-delete {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    padding: 5px 10px;
+
+}
+
+
+/* Button comment- delete */
+
+.comment-delete{
+    display: flex;
+    justify-content: flex-end;
+    background-color: teal;
+    color: white;
+    border-radius: 15%;
+    padding: 5px;
+    font-size: 0.8 rem;
+
+}
+
+/* Comments */
+.comment-article {
+    display: flex;
+    flex-direction: column;
+    margin: 1% 0;
+    padding: 2%;
+    background-color: #f1f1f1;
+}
+
+.comment-article header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-article header h5 {
+    margin: 0;
+}
+
+.comment-article header p {
+    margin: 0;
+}
+
+.comment-article footer {
+    display: flex;
+    justify-content: flex-start;
+}
