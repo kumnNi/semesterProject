@@ -66,9 +66,6 @@ function renderBlogInfo(blog) {
 }
 
 function renderBlogOverview(data,bid) {
-    //console.log("View: render von overView");
-    //console.log("-> pati data: " + JSON.stringify(data));
-
     function handleDelete(event) {
         let source = event.target.closest('LI');
         if (source) {
@@ -118,10 +115,10 @@ function renderComments2(data) {
     let page = document.getElementById('comments').cloneNode(true);
    
     page.removeAttribute('id');
-    //setNavButtons(page);
+   
     let articleTemplate = page.querySelector("article");
     articleTemplate.remove();
-    //articleTemplate.innerHTML = '';
+    
     for (let p of data) {
         let article = articleTemplate.cloneNode(true);
         p.setFormatDates(false);
@@ -151,13 +148,8 @@ function renderPostDetail(post, comments) {
     post.setFormatDates(true);
     page.removeAttribute("id");
     setDataInfo(page, post);
-     
-     
-    
     let comments2 = renderComments2(comments);
     page.append(comments2);
-    
-    
     page.addEventListener("click", handleDelete);
     return page;
 }
@@ -173,7 +165,7 @@ function renderEditView(data){
             
             presenter[action](data);
         }
-        // action === "cancel"
+        
         else if (action === "cancel") {
             console.log("Cancel gedrückt!");
             let blogId = event.target.dataset.id;
@@ -209,7 +201,7 @@ function renderAddPost(data){
             
             presenter[action](data);
         }
-        // action === "cancel"
+       
         else if (action === "cancel") {
             console.log("Cancel gedrückt!");
             let blogId = event.target.dataset.id;
