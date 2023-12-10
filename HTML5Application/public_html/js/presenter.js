@@ -62,9 +62,7 @@ async function updatePage() {
         state.selectionUpdate = false;
         view.updateNavSelection(state.blogId);
     }
-
-    // Weiter zur Übersicht
-    //showBlogOverview(state.blogId);  
+    
 
 }
 let loginPage = function () {
@@ -95,7 +93,6 @@ async function showStartPage() {
     console.log("Aufruf von presenter.showStartPage()");
     // Wenn vorher noch nichts angezeigt wurde, d.h. beim Einloggen
     if (model.isLoggedIn()) { // Wenn der Nutzer eingeloggt ist
-        // 
         let blogs = await model.getAllBlogs();
 
         state.blogId = blogs[0].id;
@@ -109,7 +106,6 @@ async function showStartPage() {
         showLoginInfo();
 
         // Weiter zur Übersicht für ersten Blog
-        //showBlogOverview(state.blo);
         router.navigateToPage(`/blogOverview/${state.blogId}`);
     }
     if (!model.isLoggedIn()) { // Wenn der Nuzter eingelogged war und sich abgemeldet hat
@@ -129,8 +125,6 @@ async function showStartPage() {
 
         loginPage();
     }
-    
-   // router.navigateToPage("/blogOverview/", +state.blodId);
 }
 
 function loadState() {
@@ -174,11 +168,6 @@ async function showPostDetail(bid, pid) {
     console.log("-> postpostpostpost: " + JSON.stringify(post));
     let page = view.renderPostDetail(post, comments);
     replace('main-content_slot', page);
-    
-    
-   
-    
-   
 }
 
 async function fillCommentsSlot() {
@@ -229,16 +218,9 @@ async function showEdit(blogId, postId) {
     state.postId = postId;
     state.detail = false;
     // Aktualisieren der allgemeinen Elemente
-   // updatePage();
     // Daten können parallel abgefragt werden.
     const post = await  model.getPost(blogId,postId);
-    //const post = await  model.getPost(blogId,postId);
-    
     let page = view.renderEditView(post);
-     
-    //console.log(`Presenter:  Postanzeigen(${blogId}, ${postId})`);
-    // Aufruf mit leerem Post-Objekt
-    //let page = view.renderEditView(post);
     replace('main-content_slot', page);
 }
 
@@ -246,7 +228,7 @@ async function save(obj) {
     console.log(`Presenter: Aufruf von save für id: ${obj.id}`);
     console.log(obj);
     let result;
-    //bid, pid, title, content
+    
     if(!obj.id){
         result = await model.addNewPost(obj.blogId, obj.title, obj.content );
         alert(`Speichern des neuen Posts  ${result.title} war erfolgreich`);
@@ -288,15 +270,12 @@ function cancel(blogId, postId) {
 
 async function deletePost(postId) {
     console.log(`Presenter: Aufruf von deletePost(${state.blogId}, ${postId})`);
-
     console.log("deletePost presenter");
     let removed = await model.deletePost(state.blogId, postId);
     alert(`Diese Post wurde gelöscht: ${removed.name}`);
     if (removed) { 
-        
         state.blogInfoSlotUpdate = true;
         state.navSlotUpdate = true;
-        //if (state.detail) {
         router.navigateToPage("/blogOverview/" + state.blogId);
         
     }
@@ -313,25 +292,11 @@ async function deleteComment(commentId) {
     state.commentsSlotUpdate =  true;
    // Fetching updated post
     let post = await model.getPost(state.blogId, state.postId);
-    //console.log("Updated post:", post); // Log the updated post details
-    
-    //state.comments = await model.getAllCommentsOfPost(state.blogId, state.postId);
-    //state.post = await model.getPost(state.blogId, state.postId);
-    
-    await showPostDetail(state.blogId, state.postId);
 
-
-       // state.blogInfoSlotUpdate = true;
-    //state.navSlotUpdate = true;
-   
-   //state.commentsSlotUpdate = true;
-
+    await showPostDetail(state.blogId, state.postId)
     await updatePage();
     
 }
-
-
-
 
 showStartPage();
 
