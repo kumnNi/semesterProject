@@ -54,8 +54,6 @@ function initRouter() {
     addRoute('add', function () {
         // Aus dem location.hash die Objekt ids lesen
         var id = window.location.pathname.split('/add/')[1].trim();
-        //let blogId = ids[0];
-        
         presenter.showAdd(id);
     });
     
@@ -86,10 +84,6 @@ function handleNavigationEvent(event) {
 
 // Initalisierung des Routers
 initRouter();
-//window.addEventListener('popstate', (event)=>handleRouting());
-
-//sorgt dafür, dass gelädte DOM....
-//window.addEventListener('load', (event)=>handleRouting());
 
 export {navigateToPage, handleNavigationEvent};
 
