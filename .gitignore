@@ -1,0 +1,16 @@
+
+# Node.js specific
+node_modules
+
+# macos specific files
+.DS_Store
+
+# Environment Variables
+.env.*
+*.env
+
+
+# mongodb
+
+# ignore log files
+*.log
